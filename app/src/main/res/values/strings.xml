@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">人脸测试</string>
+    <string name="global_tag" translatable="false">XLog-Pan</string>
+    <string name="search_fail">人脸搜索失败！请先人脸注册。</string>
+    <string name="text_spot_state">识别状态：</string>
+    <string name="spot_state">识别成功</string>
+    <string name="user_id">用户 ID：</string>
+    <string name="user">游客</string>
+    <string name="text_login_time">上次登录时间：</string>
+    <string name="login_time">2020-11-1 10:00</string>
+</resources>
