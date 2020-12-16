@@ -1,6 +1,7 @@
 package com.kingbird.arcfacelogin
 
 import com.kingbird.arcfacelogin.utils.Constants
+import com.kingbird.mylibrary.IFace
 import com.orhanobut.logger.Logger
 import com.tencentcloudapi.common.Credential
 import com.tencentcloudapi.common.exception.TencentCloudSDKException
@@ -25,9 +26,9 @@ object FaceRequestIpi {
     fun getPersonListNum(groupId: String): Long {
         var personNum: Long? = null
         try {
-            val cred = Credential(Constants.SECRET_ID, Constants.SECRET_KEY)
+            val cred = Credential(IFace.SECRET_ID, IFace.SECRET_KEY)
             val httpProfile = HttpProfile()
-            httpProfile.endpoint = Constants.HTTP_PROFILE
+            httpProfile.endpoint = IFace.HTTP_PROFILE
             val clientProfile = ClientProfile()
             clientProfile.httpProfile = httpProfile
             val client = IaiClient(cred, Constants.REGION, clientProfile)
@@ -58,9 +59,9 @@ object FaceRequestIpi {
         isUrl: Boolean
     ): Boolean {
         try {
-            val cred = Credential(Constants.SECRET_ID, Constants.SECRET_KEY)
+            val cred = Credential(IFace.SECRET_ID, IFace.SECRET_KEY)
             val httpProfile = HttpProfile()
-            httpProfile.endpoint = Constants.HTTP_PROFILE
+            httpProfile.endpoint = IFace.HTTP_PROFILE
             val clientProfile = ClientProfile()
             clientProfile.httpProfile = httpProfile
             val client = IaiClient(cred, Constants.REGION, clientProfile)
@@ -99,9 +100,9 @@ object FaceRequestIpi {
      */
     fun searchFaces(groupIds: String, image: String): Boolean {
         try {
-            val cred = Credential(Constants.SECRET_ID, Constants.SECRET_KEY)
+            val cred = Credential(IFace.SECRET_ID, IFace.SECRET_KEY)
             val httpProfile = HttpProfile()
-            httpProfile.endpoint = Constants.HTTP_PROFILE
+            httpProfile.endpoint = IFace.HTTP_PROFILE
             val clientProfile = ClientProfile()
             clientProfile.httpProfile = httpProfile
             val client = IaiClient(cred, Constants.REGION, clientProfile)
@@ -144,9 +145,9 @@ object FaceRequestIpi {
     fun getPersonList(groupId: String): Long {
         val list = ArrayList<Long>()
         try {
-            val cred = Credential(Constants.SECRET_ID, Constants.SECRET_KEY)
+            val cred = Credential(IFace.SECRET_ID, IFace.SECRET_KEY)
             val httpProfile = HttpProfile()
-            httpProfile.endpoint = Constants.HTTP_PROFILE
+            httpProfile.endpoint = IFace.HTTP_PROFILE
             val clientProfile = ClientProfile()
             clientProfile.httpProfile = httpProfile
             val client = IaiClient(cred, Constants.REGION, clientProfile)

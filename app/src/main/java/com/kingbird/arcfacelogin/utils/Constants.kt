@@ -14,15 +14,6 @@ object Constants {
     var APP_NAME="arcfaceLogin"
 
     @JvmField
-    var SECRET_ID="AKID7qPo3SNgUMmUzGJCwRomZBa1DONCr8bt"
-
-    @JvmField
-    var SECRET_KEY="yhGbhYCj1RcnkT4WkpiNzZvAFZfqmmZ8"
-
-    @JvmField
-    var HTTP_PROFILE="iai.tencentcloudapi.com"
-
-    @JvmField
     var REGION="ap-guangzhou"
 
     @JvmField
