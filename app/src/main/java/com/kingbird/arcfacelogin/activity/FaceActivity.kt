@@ -23,7 +23,6 @@ import com.kingbird.arcfacelogin.manager.ThreadManager
 import com.kingbird.arcfacelogin.utils.Constants
 import com.kingbird.arcfacelogin.utils.PermissionsUtils
 import com.kingbird.arcfacelogin.utils.SpUtil
-import com.kingbird.arcfacelogin.utils.ToastUtil
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_face.*
 import java.io.File
@@ -279,13 +278,9 @@ class FaceActivity : AppCompatActivity(), CameraListener {
                         btn_submit.isEnabled = true
                         setResumePreview()
                         switchText("人脸验证成功", true)
-//                        Toast.makeText(
-//                            this@FaceActivity, "人脸搜索成功！", Toast.LENGTH_LONG
-//                        ).show()
-                        ToastUtil.showShortToast(this,"人脸搜索成功！")
                         border_view.setScanEnabled(true)
                         border_view.setParam()
-                        sendFaceBroadcast("com.kingbird.REGISTER_SUCCESS")
+                        sendFaceBroadcast("com.kingbird.VERIFIED_SUCCESS")
                         finish()
                     } else {
                         border_view.setScanEnabled(true)
