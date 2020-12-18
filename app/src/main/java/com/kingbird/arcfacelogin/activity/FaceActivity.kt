@@ -317,6 +317,15 @@ class FaceActivity : AppCompatActivity(), CameraListener {
         }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        PermissionsUtils.onRequestPermissionsResult(this, requestCode, grantResults)
+    }
+
     /**
      * 创建监听权限的接口对象
      */
