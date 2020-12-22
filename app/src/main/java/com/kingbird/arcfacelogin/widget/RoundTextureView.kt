@@ -10,7 +10,6 @@ import android.view.ViewOutlineProvider
 import com.kingbird.arcfacelogin.R
 import kotlin.math.min
 
-
 /**
  * 说明：人脸外框
  *
@@ -52,8 +51,6 @@ class RoundTextureView : TextureView {
                         (measuredHeight + measuredWidth) / 2
                     )
                 }
-//                Log.e("RoundTextureView", "rect left = ${rect.left} top = ${rect.top} width = ${rect.width()} height = ${rect.height()}")
-//                outline?.setRoundRect(rect, mRadius)
                 outline?.setOval(rect)
 
             }
@@ -66,6 +63,9 @@ class RoundTextureView : TextureView {
         mRadius = min(measuredWidth, measuredHeight).toFloat() / 2
     }
 
+    /**
+     *  设置半径
+     */
     fun setRadius(radius: Float) {
         this.mRadius = radius
 

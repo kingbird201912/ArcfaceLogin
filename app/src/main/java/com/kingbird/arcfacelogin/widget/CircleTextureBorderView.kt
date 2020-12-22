@@ -24,7 +24,7 @@ class CircleTextureBorderView : View {
 
     private val mArcPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    private var mTextureViewWidth: Int = measuredWidth /*- ScreenUtils.dip2px(context, 73F)*/
+    private var mTextureViewWidth: Int = measuredWidth
 
     private var mColor = Color.CYAN
 
@@ -61,8 +61,6 @@ class CircleTextureBorderView : View {
         mTextHeight = mTextPaint.fontMetrics.descent - mTextPaint.fontMetrics.ascent
         attributeSet?.apply {
             val a = context.obtainStyledAttributes(this, R.styleable.CircleTextureBorderView)
-//            mTextureViewWidth = a.getDimensionPixelSize(R.styleable.CircleTextureBorderView_circleTextureWidth,
-//                measuredWidth /*- ScreenUtils.dip2px(context, 73F)*/)
             mColor = a.getColor(
                 R.styleable.CircleTextureBorderView_circleTextureBorderColor,
                 Color.CYAN
@@ -76,7 +74,7 @@ class CircleTextureBorderView : View {
         setParam()
     }
 
-     fun setParam() {
+    fun setParam() {
         if (!mScanEnabled) {
             Log.i("BorderView", "not enable scan animation.")
         }
@@ -100,7 +98,6 @@ class CircleTextureBorderView : View {
             val value = it.animatedValue as Float
             val r = mTextureViewWidth.toFloat() / 2
             val x = (measuredWidth.toFloat() - mAnimWidth) / 2
-//            Log.i("BorderView", "value = $value & mAnimWidth = $mAnimWidth & mLastY = $mLastY")
 
             if (mAnimWidth != 0F) {
                 if (mAnimWidth < value) {
@@ -148,9 +145,6 @@ class CircleTextureBorderView : View {
         val top = (measuredHeight - mTextureViewWidth.toFloat()) / 2
         val bottom = (measuredHeight + mTextureViewWidth.toFloat()) / 2
 
-        // x (measuredWidth.toFloat() - mTextPaint.measureText(mTipsText)) / 2
-        // y (measuredHeight.toFloat() + mTextureViewWidth / 2) +
-        //                    (mTextPaint.fontMetrics.descent - mTextPaint.fontMetrics.ascent) / 2
         canvas?.drawArc(left, top, right, bottom, 150F, -120F, false, mArcPaint)
         canvas?.drawText(
             mTipsText, (measuredWidth.toFloat() - mTextPaint.measureText(mTipsText)) / 2,

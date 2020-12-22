@@ -1,6 +1,5 @@
-package com.kingbird.arcfacelogin
+package com.kingbird.arcfacelogin.utils
 
-import com.kingbird.arcfacelogin.utils.Constants
 import com.kingbird.mylibrary.IFace
 import com.orhanobut.logger.Logger
 import com.tencentcloudapi.common.Credential
@@ -111,20 +110,20 @@ object FaceRequestIpi {
             req.image = image
             val resp: SearchFacesResponse = client.SearchFaces(req)
 
-            Logger.e("人脸搜索参数：" + CreatePersonResponse.toJsonString(resp))
+//            Logger.e("人脸搜索参数：" + CreatePersonResponse.toJsonString(resp))
             Logger.e("人脸搜索结果：" + resp.results[0].candidates.size)
 
             val jsonString2 = JSONObject(CreatePersonResponse.toJsonString(resp))
-            Logger.e("数据：" + jsonString2.getJSONArray("Results"))
+//            Logger.e("数据：" + jsonString2.getJSONArray("Results"))
 
             val result = jsonString2.getJSONArray("Results").getJSONObject(0)
-            Logger.e("Candidates数据：$result")
+//            Logger.e("Candidates数据：$result")
             for (i in resp.results[0].candidates.indices) {
 
                 val candidate = result.getJSONArray("Candidates").getJSONObject(i)
 //                Logger.e("candidate 数据：$candidate")
-                Logger.e("人脸ID：${candidate.getString("FaceId")}")
-                Logger.e("人员ID：${candidate.getString("PersonId")}")
+//                Logger.e("人脸ID：${candidate.getString("FaceId")}")
+//                Logger.e("人员ID：${candidate.getString("PersonId")}")
                 val score = candidate.getLong("Score")
                 Logger.e("相似度：$score")
                 if (score > 75) {
@@ -156,7 +155,7 @@ object FaceRequestIpi {
             req.offset = 0L
             req.limit = 10L
             val resp = client.GetPersonList(req)
-            Logger.e("获取人员列表数据：" + GetPersonListResponse.toJsonString(resp))
+//            Logger.e("获取人员列表数据：" + GetPersonListResponse.toJsonString(resp))
             val jsonString = JSONObject(CreatePersonResponse.toJsonString(resp))
             val personInfos = jsonString.getJSONArray("PersonInfos")
             val personSize = resp.personInfos.size

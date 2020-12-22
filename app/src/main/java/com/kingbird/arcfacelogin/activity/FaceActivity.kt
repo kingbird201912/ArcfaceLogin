@@ -11,11 +11,12 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.Size
+import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.baidu.aip.util.Base64Util
-import com.kingbird.arcfacelogin.FaceRequestIpi
+import com.kingbird.arcfacelogin.utils.FaceRequestIpi
 import com.kingbird.arcfacelogin.R
 import com.kingbird.arcfacelogin.helper.CameraHelper
 import com.kingbird.arcfacelogin.helper.CameraListener
@@ -61,6 +62,8 @@ class FaceActivity : AppCompatActivity(), CameraListener {
     private fun initViews() {
         // 扫描动画开关
         border_view.setScanEnabled(true)
+        btn_submit.visibility=View.VISIBLE
+        btn_register.visibility=View.VISIBLE
 
         btn_submit.setOnClickListener {
             type = 2
@@ -225,7 +228,7 @@ class FaceActivity : AppCompatActivity(), CameraListener {
     override fun onPreview(byteArray: ByteArray) {
         Log.i(TAG, "onPreview: ")
         runOnUiThread {
-            switchText("检测人脸中..", true)
+            switchText("检测人脸中...", true)
         }
 
         // 这里通过Base64转换类将图像数据转换格式 因为SDK检测的都用BASE64的图片
@@ -249,10 +252,10 @@ class FaceActivity : AppCompatActivity(), CameraListener {
                 )
                 if (result) {
                     runOnUiThread {
-                        border_view.setTipsText("人脸添加成功！", true)
-                        Toast.makeText(
-                            this@FaceActivity, "人脸添加成功！", Toast.LENGTH_LONG
-                        ).show()
+                        border_view.setTipsText("人脸注册成功！", true)
+//                        Toast.makeText(
+//                            this@FaceActivity, "人脸添加成功！", Toast.LENGTH_LONG
+//                        ).show()
                         border_view.setScanEnabled(true)
                         setResumePreview()
                         border_view.setParam()
@@ -261,9 +264,10 @@ class FaceActivity : AppCompatActivity(), CameraListener {
                     }
                 } else {
                     runOnUiThread {
-                        Toast.makeText(
-                            this@FaceActivity, "人脸添加失败！", Toast.LENGTH_LONG
-                        ).show()
+//                        Toast.makeText(
+//                            this@FaceActivity, "人脸添加失败！", Toast.LENGTH_LONG
+//                        ).show()
+                        border_view.setTipsText("人脸注册失败！", true)
                         border_view.setScanEnabled(true)
                         setResumePreview()
                         border_view.setParam()
@@ -277,7 +281,7 @@ class FaceActivity : AppCompatActivity(), CameraListener {
                     if (result) {
                         btn_submit.isEnabled = true
                         setResumePreview()
-                        switchText("人脸验证成功", true)
+                        switchText("人脸认证成功", true)
                         border_view.setScanEnabled(true)
                         border_view.setParam()
                         sendFaceBroadcast("com.kingbird.VERIFIED_SUCCESS")
@@ -285,7 +289,7 @@ class FaceActivity : AppCompatActivity(), CameraListener {
                     } else {
                         border_view.setScanEnabled(true)
                         setResumePreview()
-                        switchText("人脸验证失败", true)
+                        switchText("人脸认证失败", true)
                         sendFaceBroadcast("com.kingbird.VERIFIED_FAIL")
                         Toast.makeText(
                             this@FaceActivity, getString(R.string.search_fail),

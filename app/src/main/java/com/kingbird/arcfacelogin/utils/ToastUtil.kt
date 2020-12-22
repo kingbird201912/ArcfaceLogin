@@ -6,15 +6,10 @@ import android.widget.Toast
 /**
  *
  * @ProjectName:    Camera1Kotlin
- * @Package:        com.knight.cameraone.utils
+ * @Package:        com.kingbird.arcfacelogin.utils
  * @ClassName:      ToastUtil
  * @Description:    java类作用描述
- * @Author:         knight
- * @CreateDate:     2019-10-07 14:13
- * @UpdateUser:     更新者
- * @UpdateDate:     2019-10-07 14:13
- * @UpdateRemark:   更新说明
- * @Version:        1.0
+ * @Author:         pan
  */
 
 class ToastUtil {

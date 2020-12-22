@@ -2,6 +2,7 @@ package com.kingbird.arcfacelogin.activity
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Build.VERSION_CODES
@@ -12,7 +13,6 @@ import com.kingbird.arcfacelogin.utils.Constants
 import com.kingbird.arcfacelogin.utils.PermissionsUtils
 import com.kingbird.arcfacelogin.utils.SpUtil.readString
 import com.kingbird.arcfacelogin.utils.SpUtil.writeBoolean
-import com.kingbird.arcfacelogin.view.ArcfaceView
 import com.orhanobut.logger.Logger
 
 /**
@@ -63,9 +63,9 @@ class PermissionsActivity : AppCompatActivity() {
         override fun passPermissons() {
             Logger.e("权限通过")
             writeBoolean(Constants.PERMISSONS, true)
-            val view = ArcfaceView(context!!)
-            view.startCamera()
-            val packageManager: PackageManager = getPackageManager()
+            val sendIntent = Intent("com.kingbird.PERMISSIONS")
+            sendBroadcast(sendIntent)
+            val packageManager: PackageManager = packageManager
             val intent = readString(
                 Constants.MAIN_APP_NAME
             )?.let {
@@ -74,6 +74,8 @@ class PermissionsActivity : AppCompatActivity() {
                 )
             }
             intent?.let { startActivity(it) }
+
+            finish()
         }
 
         override fun forbitPermissons() {
