@@ -36,6 +36,7 @@
 <!--        </activity>-->
 
         <activity android:name=".activity.PermissionsActivity"/>
+        <activity android:name=".activity.FaceActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -2,27 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/frame"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.kingbird.arcfacelogin.widget.RoundTextureView
             android:id="@+id/round_texture_view"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
         <com.kingbird.arcfacelogin.widget.CircleTextureBorderView
             android:id="@+id/border_view"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
     </FrameLayout>
@@ -34,6 +33,7 @@
         android:layout_marginTop="30dp"
         android:background="#603FBAF1"
         android:text="@string/register"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/btn_submit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frame" />
@@ -45,6 +45,7 @@
         android:layout_marginTop="30dp"
         android:background="#603FBAF1"
         android:text="@string/submit"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_register"
         app:layout_constraintTop_toBottomOf="@id/frame" />

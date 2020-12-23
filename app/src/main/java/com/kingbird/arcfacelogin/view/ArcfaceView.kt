@@ -73,7 +73,7 @@ class ArcfaceView : ConstraintLayout, CameraListener {
     private fun initView(context: Context) {
         mContext = context
         Logger.e("context对象：$mContext")
-        LayoutInflater.from(context).inflate(R.layout.activity_face, this, true)
+        LayoutInflater.from(context).inflate(R.layout.activity_face_customize, this, true)
 
         mTextureView = findViewById<View>(R.id.round_texture_view) as RoundTextureView
         mBorderView = findViewById<View>(R.id.border_view) as CircleTextureBorderView
