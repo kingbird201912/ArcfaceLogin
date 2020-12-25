@@ -62,8 +62,8 @@ class FaceActivity : AppCompatActivity(), CameraListener {
     private fun initViews() {
         // 扫描动画开关
         border_view.setScanEnabled(true)
-        btn_submit.visibility=View.VISIBLE
-        btn_register.visibility=View.VISIBLE
+        btn_submit.visibility = View.VISIBLE
+        btn_register.visibility = View.VISIBLE
 
         btn_submit.setOnClickListener {
             type = 2
@@ -236,69 +236,83 @@ class FaceActivity : AppCompatActivity(), CameraListener {
         Logger.e("Base64 大小：${postImage!!.length}")
         ThreadManager.doExecute {
             if (type == 1) {
-                val personNum = FaceRequestIpi.getPersonListNum("2")
-                Logger.e("personNum: $personNum")
-                val person = FaceRequestIpi.getPersonList("2")
-                val personNumS: String = (person + 1).toString()
-                Logger.e("新增人员ID：$personNumS")
-
-                val result = FaceRequestIpi.createPerson(
-                    "2",
-                    "某人",
-                    personNumS,
-                    postImage,
-                    "",
-                    false
-                )
-                if (result) {
-                    runOnUiThread {
-                        border_view.setTipsText("人脸注册成功！", true)
-//                        Toast.makeText(
-//                            this@FaceActivity, "人脸添加成功！", Toast.LENGTH_LONG
-//                        ).show()
-                        border_view.setScanEnabled(true)
-                        setResumePreview()
-                        border_view.setParam()
-                        sendFaceBroadcast("com.kingbird.REGISTER_SUCCESS")
-                        finish()
-                    }
-                } else {
-                    runOnUiThread {
-//                        Toast.makeText(
-//                            this@FaceActivity, "人脸添加失败！", Toast.LENGTH_LONG
-//                        ).show()
-                        border_view.setTipsText("人脸注册失败！", true)
-                        border_view.setScanEnabled(true)
-                        setResumePreview()
-                        border_view.setParam()
-                        sendFaceBroadcast("com.kingbird.REGISTER_FAIL")
-                    }
-                }
+                faceRegsiter("2", "某人", postImage, "", false)
             } else if (type == 2) {
-                val result = FaceRequestIpi.searchFaces("2", postImage)
-                runOnUiThread {
-                    Logger.e("人脸搜索最终结果：$result")
-                    if (result) {
-                        btn_submit.isEnabled = true
-                        setResumePreview()
-                        switchText("人脸认证成功", true)
-                        border_view.setScanEnabled(true)
-                        border_view.setParam()
-                        sendFaceBroadcast("com.kingbird.VERIFIED_SUCCESS")
-                        finish()
-                    } else {
-                        border_view.setScanEnabled(true)
-                        setResumePreview()
-                        switchText("人脸认证失败", true)
-                        sendFaceBroadcast("com.kingbird.VERIFIED_FAIL")
-                        Toast.makeText(
-                            this@FaceActivity, getString(R.string.search_fail),
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-
-                }
+                faceVerified("2", postImage)
             }
+        }
+    }
+
+    /**
+     *  人脸注册
+     */
+    private fun faceRegsiter(
+        groupId: String,
+        personName: String,
+        postImage: String,
+        url: String,
+        isUrl: Boolean
+    ) {
+        val personNum = FaceRequestIpi.getPersonListNum("2")
+        Logger.e("personNum: $personNum")
+        val person = FaceRequestIpi.getPersonList("2")
+        val personNumS: String = (person + 1).toString()
+        Logger.e("新增人员ID：$personNumS")
+
+        val result = FaceRequestIpi.createPerson(
+            groupId,
+            personName,
+            personNumS,
+            postImage,
+            url,
+            isUrl
+        )
+        if (result) {
+            runOnUiThread {
+                border_view.setTipsText("人脸注册成功！", true)
+                border_view.setScanEnabled(true)
+                setResumePreview()
+                border_view.setParam()
+                sendFaceBroadcast("com.kingbird.REGISTER_SUCCESS")
+                finish()
+            }
+        } else {
+            runOnUiThread {
+                border_view.setTipsText("人脸注册失败！", true)
+                border_view.setScanEnabled(true)
+                setResumePreview()
+                border_view.setParam()
+                sendFaceBroadcast("com.kingbird.REGISTER_FAIL")
+            }
+        }
+    }
+
+    /**
+     *  人脸认证
+     */
+    private fun faceVerified(groupIds: String, postImage: String) {
+        val result = FaceRequestIpi.searchFaces(groupIds, postImage)
+        runOnUiThread {
+            Logger.e("人脸搜索最终结果：$result")
+            if (result) {
+                btn_submit.isEnabled = true
+                setResumePreview()
+                switchText("人脸认证成功", true)
+                border_view.setScanEnabled(true)
+                border_view.setParam()
+                sendFaceBroadcast("com.kingbird.VERIFIED_SUCCESS")
+                finish()
+            } else {
+                border_view.setScanEnabled(true)
+                setResumePreview()
+                switchText("人脸认证失败", true)
+                sendFaceBroadcast("com.kingbird.VERIFIED_FAIL")
+                Toast.makeText(
+                    this@FaceActivity, getString(R.string.search_fail),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
         }
     }
 

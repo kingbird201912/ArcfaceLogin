@@ -21,7 +21,9 @@ import kotlin.collections.ArrayList
  */
 object FaceRequestIpi {
 
-
+    /**
+     *  获取人员列表编号
+     */
     fun getPersonListNum(groupId: String): Long {
         var personNum: Long? = null
         try {
