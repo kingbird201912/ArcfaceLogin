@@ -9,6 +9,7 @@ import com.tencentcloudapi.common.profile.HttpProfile
 import com.tencentcloudapi.iai.v20200303.IaiClient
 import com.tencentcloudapi.iai.v20200303.models.*
 import org.json.JSONObject
+import java.lang.Exception
 import kotlin.collections.ArrayList
 
 
@@ -96,8 +97,10 @@ object FaceRequestIpi {
     }
 
     /**
-     *  人脸搜索
+     *  人脸认证
      *  导包303
+     *  groupIds 人脸库ID
+     *  image base64 图片
      */
     fun searchFaces(groupIds: String, image: String): Boolean {
         try {
@@ -178,5 +181,39 @@ object FaceRequestIpi {
             return 0
         }
 //        return 0
+    }
+
+    /**
+     * 人脸注册
+     *  groupId 人脸ID
+     *  personName 人脸名称
+     *  postImage  人脸图片（base64）
+     *  url 人脸图片URL（图片路径）
+     *  isUrl 是否启用图片url
+     */
+    fun requestFaceRegsiter(
+        groupId: String,
+        personName: String,
+        postImage: String,
+        url: String,
+        isUrl: Boolean
+    ): Boolean {
+        try {
+            val person = getPersonList(groupId)
+            val personNumS: String = (person + 1).toString()
+            Logger.e("新增人员ID：$personNumS")
+
+            return createPerson(
+                groupId,
+                personName,
+                personNumS,
+                postImage,
+                url,
+                isUrl
+            )
+        } catch (e: Exception) {
+            Logger.e("人脸注册异常：$e")
+            return false
+        }
     }
 }

@@ -239,7 +239,7 @@ class ArcfaceView : ConstraintLayout, CameraListener {
     /**
      * 人脸认证 （图片base64图片 大小不超过 5M）
      */
-    fun faceVerified(groupIds: String, postImage: String) {
+    private fun faceVerified(groupIds: String, postImage: String) {
         val result = FaceRequestIpi.searchFaces(groupIds, postImage)
         post {
             Logger.e("人脸认证最终结果：$result")
@@ -263,23 +263,17 @@ class ArcfaceView : ConstraintLayout, CameraListener {
     /**
      * 人脸注册
      */
-    fun faceRegsiter(
+    private fun faceRegsiter(
         groupId: String,
         personName: String,
         postImage: String,
         url: String,
         isUrl: Boolean
     ) {
-        val personNum = FaceRequestIpi.getPersonListNum(groupId)
-        Logger.e("personNum: $personNum")
-        val person = FaceRequestIpi.getPersonList(groupId)
-        val personNumS: String = (person + 1).toString()
-        Logger.e("新增人员ID：$personNumS")
 
-        val result = FaceRequestIpi.createPerson(
+        val result = FaceRequestIpi.requestFaceRegsiter(
             groupId,
             personName,
-            personNumS,
             postImage,
             url,
             isUrl
